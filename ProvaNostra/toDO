@@ -1,0 +1,14 @@
+(Registrare Utente): 1. Il Simulatore chiederà all'Utente di inserire il suo IdUtente, la sua Email e il numero di cellulare.
+                     2. Algoritmo di riconoscimento volto e di salvataggio di quest'ultimo (Fatto, bisogna commentarlo).
+                  	 
+(Accedere alla casa): 1. Creare Algoritmo che, riconosciuto l'utente dalla webcam, lo compara con tutti quelli presenti nel suo DB
+                         e verifica se è stato riconosciuto o meno e notifica l'utente in ogni caso:
+                      2. Se dopo 3 tentativi consecutivi, il simulatore ancora non riesce a riconoscere l'utente, notifica
+                         l'utente amministratore tramite email/sms.
+
+
+
+1. Se il simulatore riconosce a run-time che l'utente sta tentando di farsi riconoscere in una zona poco illuminata, 
+lo notifica di spostarsi in una zona più luminosa e possibiulmente con dietro uno sfondo chiaro.
+Ps. calcolare la percentuale di pixel luminosi: se il maggior numero di pixels non è luminoso, cioè che l'rgb dei suoui pixels 
+non si trova in un range prestabilito, significa che l'immagine non è luminosa.
