@@ -1,8 +1,9 @@
 package take_snaphot;
 
-import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
 
-import javax.swing.ImageIcon;
+import javax.imageio.ImageIO;
 
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
@@ -43,10 +44,10 @@ public class FaceDetector {
 			//}
 		}
 
-
 		Mat image_roi = new Mat(image, rect_Crop);
 		String imagePath = "C:\\Users\\anton\\Desktop\\aa1.jpg";
 		Imgcodecs.imwrite(imagePath, image_roi);
 
 	}
+
 }

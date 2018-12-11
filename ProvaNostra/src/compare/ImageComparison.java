@@ -1,5 +1,6 @@
 package compare;
 
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.File;
@@ -16,19 +17,22 @@ import java.io.IOException;
 
 class ImageComparision {
 
-	public void compare(File fileA, File fileB) {
-		BufferedImage imgA = null;
-		BufferedImage imgB = null;
+	public void compare(Image imgA, Image imgB) {
+//		BufferedImage imgA = null;
+//		BufferedImage imgB = null;
 
-		try {
 
-			imgA = ImageIO.read(fileA);
-			imgB = ImageIO.read(fileB);
+	//		imgA = ImageIO.read(fileA);
+	//		imgB = ImageIO.read(fileB);
 
-			int width1 = imgA.getWidth();
-			int width2 = imgB.getWidth();
-			int height1 = imgA.getHeight();
-			int height2 = imgB.getHeight();
+
+			/**
+			 * TODO SCALE of image
+			 */
+			int width1 = imgA.getWidth(null);
+			int width2 = imgB.getWidth(null);
+			int height1 = imgA.getHeight(null);
+			int height2 = imgB.getHeight(null);
 
 			if ((width1 != width2) || (height1 != height2))
 				System.out.println("Error: Images dimensions" + " mismatch");
@@ -36,8 +40,8 @@ class ImageComparision {
 				long difference = 0;
 				for (int y = 0; y < height1; y++) {
 					for (int x = 0; x < width1; x++) {
-						int rgbA = imgA.getRGB(x, y);
-						int rgbB = imgB.getRGB(x, y);
+						int rgbA = ((BufferedImage) imgA).getRGB(x, y);
+						int rgbB = ((BufferedImage) imgB).getRGB(x, y);
 						int redA = (rgbA >> 16) & 0xff;
 						int greenA = (rgbA >> 8) & 0xff;
 						int blueA = (rgbA) & 0xff;
@@ -70,19 +74,26 @@ class ImageComparision {
 					System.err.println("I due volti NON SONO gli stessi.");
 				System.out.println("Difference Percentage-->" + percentage);
 			}
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-		}
 	}
 	
 	public static void main(String[] args) {
-		ImageComparision imageComparision = new ImageComparision();
+		try {
+			
+			ImageComparision imageComparision = new ImageComparision();
+			
+			String base = "C:\\Users\\anton\\Desktop\\";
+			File fileA = new File("C:\\Users\\anton\\Desktop\\Mine\\University\\2INGSW\\image\\volti uguale luce ( funziona bene )\\ancora.jpg");
+			File fileB = new File("C:\\Users\\anton\\Desktop\\Mine\\University\\2INGSW\\image\\volti uguale luce ( funziona bene )\\aa1.jpg");
+			
+			Image im = ImageIO.read(fileA);
+			Image im1 = ImageIO.read(fileB);
+			
+			imageComparision.compare(im, im1);
 
-		String base = "C:\\Users\\anton\\Desktop\\";
-		File fileA = new File("C:\\Users\\anton\\Desktop\\Mine\\University\\2INGSW\\image\\volti uguale luce ( funziona bene )\\viso\\toDO\\a_crop.jpg");
-		File fileB = new File("C:\\Users\\anton\\Desktop\\Mine\\University\\2INGSW\\image\\volti uguale luce ( funziona bene )\\viso\\aa1.jpg");
-
-		imageComparision.compare(fileA, fileB);
+		}catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}
 	}
 
 }
