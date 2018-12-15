@@ -1,4 +1,4 @@
-package compare;
+package face_detection.compare;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;

@@ -1,4 +1,4 @@
-package take_snaphot;
+package face_detection.take_snapshot;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -15,7 +15,7 @@ import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
 
-public class FaceDetector {
+public class CropImage {
 	private static Mat cropImage;
 
 	public static void main(String[] args) throws Exception {
@@ -29,7 +29,7 @@ public class FaceDetector {
 		CascadeClassifier faceDetector = new CascadeClassifier();
 		faceDetector.load("resources/haarcascades/haarcascade_frontalface_alt.xml");
 
-		Mat image = Imgcodecs.imread("C:\\Users\\anton\\Desktop\\aa.jpg");
+		Mat image = Imgcodecs.imread("C:\\Users\\anton\\Desktop\\Mine\\University\\2INGSW\\image\\volti uguale luce ( funziona bene )\\viso\\angelo_2.jpg");
 
 		faceDetector.detectMultiScale(image, faces);
 
