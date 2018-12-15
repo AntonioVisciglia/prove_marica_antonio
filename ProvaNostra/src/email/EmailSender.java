@@ -127,7 +127,7 @@ public class EmailSender {
 	 * @throws MessagingException
 	 */
 	public void sendEmail(MimeMessage m, Session s) throws FileNotFoundException, MessagingException {
-        	Configuration config = (Configuration) Utils.getJsonFile(Configuration.class, Utils.CONFIG_PATH);
+        	Configuration config = (Configuration) Utils.getJsonFile(Configuration.class, Utils.CONFIG_PATH_EMAIL);
 
 			String email = config.userEmail;
 			String passwd = config.userPassword;

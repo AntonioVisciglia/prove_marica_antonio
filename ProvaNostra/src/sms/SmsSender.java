@@ -27,7 +27,7 @@ public class SmsSender {
 	public void sendSms() {
 		try {
 
-			Configuration config = (Configuration) Utils.getJsonFile(Configuration.class, Utils.CONFIG_PATH);
+			Configuration config = (Configuration) Utils.getJsonFile(Configuration.class, Utils.CONFIG_PATH_SMS);
 
 			String baseUrlSms = config.baseUrlSms;
 			String messageQuality = config.messageQuality;
