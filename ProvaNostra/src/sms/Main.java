@@ -34,7 +34,6 @@ public class Main {
 			sendSMS.setMessage(MESSAGE_BODY);
 			sendSMS.setMessageType(MESSAGE_LOW_QUALITY);
 			sendSMS.addRecipient(RECIPIENT);
-		//	sendSMS.setSender("Giovanni Viscilgia");
 
 			if (sendSMS(authKeys, sendSMS))
 				System.out.println("SENT");
