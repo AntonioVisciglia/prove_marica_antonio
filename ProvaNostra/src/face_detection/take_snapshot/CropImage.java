@@ -29,7 +29,7 @@ public class CropImage {
 		CascadeClassifier faceDetector = new CascadeClassifier();
 		faceDetector.load("resources/haarcascades/haarcascade_frontalface_alt.xml");
 
-		Mat image = Imgcodecs.imread("C:\\Users\\anton\\Desktop\\Mine\\University\\2INGSW\\image\\volti uguale luce ( funziona bene )\\viso\\angelo_2.jpg");
+		Mat image = Imgcodecs.imread("C:\\Users\\anton\\Desktop\\3.jpg");
 
 		faceDetector.detectMultiScale(image, faces);
 
@@ -45,7 +45,7 @@ public class CropImage {
 		}
 
 		Mat image_roi = new Mat(image, rect_Crop);
-		String imagePath = "C:\\Users\\anton\\Desktop\\aa1.jpg";
+		String imagePath = "C:\\Users\\anton\\Desktop\\crop8.jpg";
 		Imgcodecs.imwrite(imagePath, image_roi);
 
 	}

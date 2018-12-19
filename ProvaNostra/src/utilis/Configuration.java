@@ -23,4 +23,20 @@ public class Configuration {
 	public String messageBody;
 	public String recipient;
 
+	/*
+	 * DB set
+	 */
+	public String jdbc;
+	public String host;
+	public String port;
+	public String database;
+	public String username;
+	public String password;
+	public String driver;
+
+	/*
+	 * DB query
+	 */
+	public String insertUser;
+	public String findByEmail;
 }

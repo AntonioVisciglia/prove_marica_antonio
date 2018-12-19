@@ -3,6 +3,9 @@ package face_detection.compare;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
+
+import com.sun.mail.handlers.image_gif;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -68,7 +71,7 @@ class ImageComparision {
 				// There are 255 values of pixels in total
 				double percentage = (avg_different_pixels / 255) * 100;
 
-				if( percentage < 12 )
+				if( percentage < 6.1 )
 					System.out.println("I due volti SONO gli stessi.");
 				else 
 					System.err.println("I due volti NON SONO gli stessi.");
@@ -82,8 +85,8 @@ class ImageComparision {
 			ImageComparision imageComparision = new ImageComparision();
 			
 			String base = "C:\\Users\\anton\\Desktop\\";
-			File fileA = new File("C:\\Users\\anton\\Desktop\\Mine\\University\\2INGSW\\image\\volti uguale luce ( funziona bene )\\ancora.jpg");
-			File fileB = new File("C:\\Users\\anton\\Desktop\\Mine\\University\\2INGSW\\image\\volti uguale luce ( funziona bene )\\aa1.jpg");
+			File fileA = new File("C:\\Users\\anton\\Desktop\\crop10.jpg");
+			File fileB = new File("C:\\Users\\anton\\Desktop\\crop7.jpg");
 			
 			Image im = ImageIO.read(fileA);
 			Image im1 = ImageIO.read(fileB);

@@ -1,4 +1,5 @@
 {
-	"": ""
+	"insertUser": "insert into ingsw.users values (?,?,?,?);",
+	"findByEmail": "select * from ingsw.users where email=?;"
 
 }

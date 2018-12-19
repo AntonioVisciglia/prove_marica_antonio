@@ -1,0 +1,9 @@
+{
+ "driver": "org.postgresql.Driver",
+  "jdbc": "postgresql",
+  "host": "fantaleague.ddns.net",
+  "port": "5432",
+  "database": "fantaleague",
+  "username": "fantauser",
+  "password": "fantauser112358"
+}

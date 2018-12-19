@@ -3,8 +3,6 @@ package utilis;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 
 import com.google.gson.Gson;
 
@@ -20,7 +18,9 @@ public class Utils {
 	 */
 	public static final String CONFIG_PATH_EMAIL = "resources/config_email.json";
 	public static final String CONFIG_PATH_SMS = "resources/config_sms.json";
+	public static final String CONFIG_PATH_DB = "resources/config_db.json";
 	public static final String DB_PATH_QUERY = "resources/query.json";
+	
 
 	/**
 	 * Metodo che prende come parametri Il Tipo di classe che ha all'interno i dati
