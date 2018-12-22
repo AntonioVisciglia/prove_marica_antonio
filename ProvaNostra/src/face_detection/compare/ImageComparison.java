@@ -18,16 +18,9 @@ import java.io.IOException;
  *
  */
 
-class ImageComparision {
+public class ImageComparison {
 
 	public void compare(Image imgA, Image imgB) {
-//		BufferedImage imgA = null;
-//		BufferedImage imgB = null;
-
-
-	//		imgA = ImageIO.read(fileA);
-	//		imgB = ImageIO.read(fileB);
-
 
 			/**
 			 * TODO SCALE of image
@@ -82,11 +75,11 @@ class ImageComparision {
 	public static void main(String[] args) {
 		try {
 			
-			ImageComparision imageComparision = new ImageComparision();
+			ImageComparison imageComparision = new ImageComparison();
 			
 			String base = "C:\\Users\\anton\\Desktop\\";
-			File fileA = new File("C:\\Users\\anton\\Desktop\\crop10.jpg");
-			File fileB = new File("C:\\Users\\anton\\Desktop\\crop7.jpg");
+			File fileA = new File(base+"a2.jpg");
+			File fileB = new File(base +"a3.jpg");
 			
 			Image im = ImageIO.read(fileA);
 			Image im1 = ImageIO.read(fileB);

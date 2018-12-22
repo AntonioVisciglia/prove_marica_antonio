@@ -7,6 +7,7 @@ package utilis;
  *
  */
 public class Configuration {
+
 	/*
 	 * email
 	 */

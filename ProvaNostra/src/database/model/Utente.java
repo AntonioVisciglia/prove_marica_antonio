@@ -1,5 +1,9 @@
 package database.model;
 
+/**
+ * 
+ * @author anton
+ */
 public class Utente {
 
 	private String nickName;
@@ -7,9 +11,8 @@ public class Utente {
 	private String telefonNumber;
 	private String pathImage;
 
-
 	public Utente() {
-		
+
 	}
 
 	public Utente(String nickName, String email, String telefonNumber, String pathImage) {
