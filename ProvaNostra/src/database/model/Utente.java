@@ -15,9 +15,9 @@ public class Utente {
 
 	}
 
-	public Utente(String nickName, String email, String telefonNumber, String pathImage) {
-		this.nickName = nickName;
+	public Utente( String email, String nickName, String telefonNumber, String pathImage) {
 		this.email = email;
+		this.nickName = nickName;
 		this.telefonNumber = telefonNumber;
 		this.pathImage = pathImage;
 	}

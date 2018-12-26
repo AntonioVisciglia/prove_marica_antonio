@@ -1,5 +1,6 @@
 {
-	"insertUser": "insert into ingsw.users values (?,?,?,?);",
-	"findByEmail": "select * from ingsw.users where email=?;"
+	"insertUser": "insert into ingswschema.users values (?,?,?,?);",
+	"findByEmail": "select * from ingswschema.users where email=?;",
+	"deleteUtenteByEmail" : "delete from ingswschema.users where email=?;"
 
 }

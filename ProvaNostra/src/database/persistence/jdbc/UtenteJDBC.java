@@ -17,7 +17,7 @@ import utilis.Utils;
 
 public class UtenteJDBC implements UtenteDAO {
 
-	BasicDataSource basicDataSource;
+	private BasicDataSource basicDataSource;
 
 	public UtenteJDBC(BasicDataSource basicDataSource) {
 		this.basicDataSource = basicDataSource;
@@ -30,15 +30,16 @@ public class UtenteJDBC implements UtenteDAO {
 		PreparedStatement statement = null;
 
 		try {
+
 			conn = basicDataSource.getConnection();
 
 			Configuration config = (Configuration) Utils.getJsonFile(Configuration.class, Utils.DB_PATH_QUERY);
 
 			statement = conn.prepareStatement(config.insertUser);
-			statement.setString(1, utente.getNickName());
-			statement.setString(2, utente.getEmail());
+			statement.setString(1, utente.getEmail());
+			statement.setString(2, utente.getNickName());
 			statement.setString(3, utente.getTelefonNumber());
-			statement.setString(3, utente.getPathImage());
+			statement.setString(4, utente.getPathImage());
 
 			statement.executeUpdate();
 
@@ -90,8 +91,8 @@ public class UtenteJDBC implements UtenteDAO {
 				
 				user.setEmail(resultSet.getString("email"));
 				user.setNickName(resultSet.getString("nick_name"));
-				user.setPathImage(resultSet.getString("path_image"));
-				user.setTelefonNumber(resultSet.getString("teleohon_number"));
+				user.setPathImage(resultSet.getString("image_path"));
+				user.setTelefonNumber(resultSet.getString("phone_number"));
 
 			}
 
@@ -110,6 +111,42 @@ public class UtenteJDBC implements UtenteDAO {
 				connection.close();
 		}
 
+	}
+
+	@Override
+	public void deleteUtente(String email) throws Exception {
+		Connection conn = null;
+		PreparedStatement statement = null;
+
+		try {
+			
+			conn = basicDataSource.getConnection();
+
+			Configuration config = (Configuration) Utils.getJsonFile(Configuration.class, Utils.DB_PATH_QUERY);
+
+			statement = conn.prepareStatement(config.deleteUtenteByEmail);
+			statement.setString(1, email);
+
+			statement.executeUpdate();
+
+		} catch (SQLException e) {
+
+			if (e.getSQLState().equals("23505")) {
+				throw new PersistenceException(10006L);
+			} else {
+				throw e;
+			}
+
+		} finally {
+			try {
+				if (statement != null)
+					statement.close();
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
 	}
 
 }

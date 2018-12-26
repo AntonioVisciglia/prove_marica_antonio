@@ -40,4 +40,5 @@ public class Configuration {
 	 */
 	public String insertUser;
 	public String findByEmail;
+	public String deleteUtenteByEmail;
 }
