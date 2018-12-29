@@ -194,6 +194,7 @@ public class ImageComparison {
 		
         //ELIMINO IL FILE DALLA CARTELLA
 		this.deleteAnElementInAfolder("resources/temp_image", "temp.jpg");
+//		this.moveNewUserToImageFolder();
 		
 	}catch (Exception e) {
 		// TODO: handle exception
@@ -224,18 +225,18 @@ public class ImageComparison {
 	 * Sposta il file dalla cartella 'tmep_image' alla 'images'
 	 * @param file
 	 */
-//	private void moveNewUserToImageFolder(File file)
-//	{
-//		//aggiungo il file nella cartella 'images'
-//		
-//		try {
-//			Files.move ( Paths.get("resources/temp_image/a6.jpg"),  Paths.get("resources/images/a"+this.cont+".jpg"));
+	private void moveNewUserToImageFolder()
+	{
+		//aggiungo il file nella cartella 'images'
+		
+		try {
+			Files.move ( Paths.get("resources/temp_image/temp.jpg"),  Paths.get("resources/images/"+"a7.jpg"));
 //			this.cont++;
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} 		
-//	}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 		
+	}
 
 	
 	
