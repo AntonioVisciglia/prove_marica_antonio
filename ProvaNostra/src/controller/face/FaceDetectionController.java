@@ -169,7 +169,7 @@ public class FaceDetectionController {
 
 		for (int i = 0; i < facesArray.length; i++) {
 
-			if (facesArray[i].width == 300 && facesArray[i].height == 300) {
+			if (facesArray[i].width >= 300 && facesArray[i].height >= 300) {
 				Imgproc.rectangle(frame, facesArray[i].tl(), facesArray[i].br(), new Scalar(0, 255, 0), 3);
 				this.captureAndCrop(faces,frame,"resources/temp_image/temp.jpg");
 				this.setClosed();

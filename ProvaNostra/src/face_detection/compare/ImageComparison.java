@@ -1,5 +1,6 @@
 package face_detection.compare;
 
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
@@ -86,22 +87,13 @@ public class ImageComparison {
 	 */
 	private boolean compareTwoImages(Image imgA, Image imgB, Long key, String pathB) {
 
-		System.out.println("wa: "+imgA.getWidth(null)+" wb: "+imgB.getWidth(null));
-//		this.resizeImage(imgA);
-//		this.resizeImage(imgB);
-
-			//QUI VA FATTA LA RESIZE DELLE IMMAGINI
-//			System.out.println("PRIMA wa: "+imgA.getWidth(null)+" wb: "+imgB.getWidth(null));
-//			BufferedImage imgB2 = ((BufferedImage)imgA);
-//		    BufferedImage new_image = new BufferedImage(300, 300, imgB2.getType());
-//			imgA = new_image;
-//			System.out.println("DOPO: wa: "+imgA.getWidth(null));
-//		
-//			imgB2 = ((BufferedImage)imgA);
-//		    new_image = new BufferedImage(300, 300, imgB2.getType());
-//			imgB = new_image;
-//			System.out.println("DOPO: wb: "+imgB.getWidth(null));
+		System.out.println("prima wa: "+imgA.getWidth(null)+" wb: "+imgB.getWidth(null));
 		
+		Image im = this.resize((BufferedImage)imgA, 300, 300);
+		imgA = im;
+		Image im2 = this.resize((BufferedImage)imgB, 300, 300);
+		imgB = im2;
+		System.out.println("dopo wa: "+imgA.getWidth(null)+" wb: "+imgB.getWidth(null));
 		int width1 = imgA.getWidth(null);
 		int height1 = imgA.getHeight(null);
 		
@@ -137,7 +129,7 @@ public class ImageComparison {
 		double percentage = (avg_different_pixels / 255) * 100;
 		System.out.println("Difference Percentage-->  "+percentage);
 //		System.out.println("keyimA: "+key+", path imgA: "+this.users_faces_files.get(key).getPath()+", path imgB: "+pathB+", ");
-		if (percentage < 6.1) {
+		if (percentage < 9.1) {
 			System.out.println("I due volti SONO gli stessi.");
 			return true;
 		}
@@ -161,31 +153,15 @@ public class ImageComparison {
 		if (file_to_delete.exists())
 			file_to_delete.delete();
 	}
-
-	/**
-	 * Questa funzione fa la resize logica di un'immagine.
-	 * 
-	 * @param im
-	 *            -> l'immagine a cui viene applicata la resize.
-	 * @return
-	 */
-	private void resizeImage(Image im)
-	{
-		int width = im.getWidth(null);
-		int height = im.getHeight(null);
-
-		if ((width != 300) || (height != 300))
-		{
-			//QUI VA FATTA LA RESIZE DELLE IMMAGINI
-			System.out.println("In 'Compare'. Error: Images dimensions" + " mismatch");
-			System.out.println("PRIMA: width: "+width+" height: "+height);
-			BufferedImage imgB2 = ((BufferedImage)im);
-		    BufferedImage new_image = new BufferedImage(300, 300, imgB2.getType());
-			im = new_image;
-			System.out.println("DOPO: width: "+im.getWidth(null)+" height: "+im.getHeight(null));
-		}
-		
-	}
+	
+	private BufferedImage resize(BufferedImage img, int height, int width) {
+        Image tmp = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        BufferedImage resized = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = resized.createGraphics();
+        g2d.drawImage(tmp, 0, 0, null);
+        g2d.dispose();
+        return resized;
+    }
 
 	/**
 	 * Contiene tutto l'algoritmo della compare tra l'immagine appena fatta dalla
@@ -198,9 +174,9 @@ public class ImageComparison {
 			File fileA = new File(base + "temp.jpg");
 
 			Image im = ImageIO.read(fileA);
-
-			// controllo se va fatta la resize o meno dell'immagine
-			// this.resizeImage(im);
+			System.out.println("prima w: "+im.getWidth(null)+" h: "+im.getHeight(null));
+			
+			System.out.println("dopo w: "+im.getWidth(null)+" h: "+im.getHeight(null));
 
 			if (!this.isAnewUser(im,fileA.getPath()))
 				System.out.println("ACCESSO PERMESSO");
@@ -213,7 +189,7 @@ public class ImageComparison {
 
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 	}
 	
