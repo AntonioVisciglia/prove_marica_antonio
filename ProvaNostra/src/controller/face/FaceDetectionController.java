@@ -48,6 +48,13 @@ public class FaceDetectionController {
 	// face cascade classifier
 	private CascadeClassifier faceCascade;
 	private int absoluteFaceSize;
+	
+	private ImageComparison image_comparison;
+	
+	public FaceDetectionController() {
+		// TODO Auto-generated constructor stub
+		this.image_comparison= new ImageComparison();
+	}
 
 	/**
 	 * Init the controller, at start time
@@ -162,11 +169,12 @@ public class FaceDetectionController {
 
 		for (int i = 0; i < facesArray.length; i++) {
 
-			if (facesArray[i].width >= 300 && facesArray[i].height >= 300) {
+			if (facesArray[i].width == 300 && facesArray[i].height == 300) {
 				Imgproc.rectangle(frame, facesArray[i].tl(), facesArray[i].br(), new Scalar(0, 255, 0), 3);
 				this.captureAndCrop(faces,frame,"resources/temp_image/temp.jpg");
 				this.setClosed();
-				this.compare();
+//				this.compare();
+				this.registerUser();
 				break;
 			} 
 //			else
@@ -177,8 +185,12 @@ public class FaceDetectionController {
 	
 	private void compare()
 	{
-		ImageComparison image_comparison= new ImageComparison();
-		image_comparison.compare();
+		this.image_comparison.compare();
+	}
+	
+	private void registerUser()
+	{
+		this.image_comparison.register();
 	}
 
 	private void captureAndCrop(MatOfRect faces, Mat frame, String path) {

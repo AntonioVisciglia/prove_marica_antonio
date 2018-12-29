@@ -2,6 +2,10 @@ package face_detection;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
@@ -38,7 +42,7 @@ public class FaceController {
 
 	}
 
-	public void compare(Image imgA, Image imgB) {
+	public static void compare(Image imgA, Image imgB) {
 
 		/**
 		 * TODO SCALE of image
@@ -92,6 +96,21 @@ public class FaceController {
 
 	public static void main(String[] args) {
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+		String base = "resources/temp_image/";
+		File fileA = new File(base + "temp.jpg");
+		String baseB = "resources/images/";
+		File fileB = new File(baseB + "a3.jpg");
+
+		
+
+		try {
+			Image imA = ImageIO.read(fileA);
+			Image imB = ImageIO.read(fileB);
+			compare(imA,imB);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
