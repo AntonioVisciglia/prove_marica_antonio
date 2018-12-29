@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
@@ -21,16 +22,14 @@ import java.util.HashMap;
 public class ImageComparison {
 	
 	//Key: UserEmail; Value:path of UserFaceImage
-	private HashMap<String, File> users_faces_files;
+	private HashMap<Long, File> users_faces_files;
 	//Key: UserEmail; Value: user image 
-	private HashMap<String, Image> users_faces_images;
-	private int cont;
+	private HashMap<Long, Image> users_faces_images;
 	
 	public ImageComparison() {
 		// TODO Auto-generated constructor stub
-		this.users_faces_files = new HashMap<String, File>();
-		this.users_faces_images = new HashMap<String, Image>();
-		this.cont = 7; //ora è 7(per prova), poi sarà 1
+		this.users_faces_files = new HashMap<Long, File>();
+		this.users_faces_images = new HashMap<Long, Image>();
 		this.soloPERORA();
 	}
 	
@@ -44,14 +43,14 @@ public class ImageComparison {
 		try {
 		File folder = new File("resources/images");
 		File[] listOfFiles = folder.listFiles();
-		String cont = "1";
+		long cont = 1;
 
 		for (File file : listOfFiles) {
 		    if (file.isFile()) {
 		        this.users_faces_files.put(cont, file);
 				this.users_faces_images.put(cont, ImageIO.read(file));
 				}
-		        cont+=1;
+		        cont++;
 		    }
 		}catch (IOException e) {
 					// TODO Auto-generated catch block
@@ -207,14 +206,14 @@ public class ImageComparison {
 	 * @param user_email
 	 * @param file_user_image_path
 	 */
-	private void addUserImage(String user_email, String file_user_image_path)
+	private void addUserImage(long user_id, String file_user_image_path)
 	{
 		try {
 			String base = "resources/images/";
 		    File file = new File(base +file_user_image_path);
 			Image user_image = ImageIO.read(file);
-			this.users_faces_files.put(user_email, file);
-			this.users_faces_images.put(user_email, user_image);
+			this.users_faces_files.put(user_id, file);
+			this.users_faces_images.put(user_id, user_image);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -225,18 +224,18 @@ public class ImageComparison {
 	 * Sposta il file dalla cartella 'tmep_image' alla 'images'
 	 * @param file
 	 */
-	private void moveNewUserToImageFolder(File file)
-	{
-		//aggiungo il file nella cartella 'images'
-		
-		try {
-			Files.move ( Paths.get("resources/temp_image/a6.jpg"),  Paths.get("resources/images/a"+this.cont+".jpg"));
-			this.cont++;
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 		
-	}
+//	private void moveNewUserToImageFolder(File file)
+//	{
+//		//aggiungo il file nella cartella 'images'
+//		
+//		try {
+//			Files.move ( Paths.get("resources/temp_image/a6.jpg"),  Paths.get("resources/images/a"+this.cont+".jpg"));
+//			this.cont++;
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} 		
+//	}
 
 	
 	
