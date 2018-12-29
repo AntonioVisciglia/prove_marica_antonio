@@ -34,12 +34,13 @@ public class UtenteJDBC implements UtenteDAO {
 			conn = basicDataSource.getConnection();
 
 			Configuration config = (Configuration) Utils.getJsonFile(Configuration.class, Utils.DB_PATH_QUERY);
-
 			statement = conn.prepareStatement(config.insertUser);
+
 			statement.setString(1, utente.getEmail());
 			statement.setString(2, utente.getNickName());
 			statement.setString(3, utente.getTelefonNumber());
 			statement.setString(4, utente.getPathImage());
+			statement.setBoolean(5, utente.isAdministrator());
 
 			statement.executeUpdate();
 

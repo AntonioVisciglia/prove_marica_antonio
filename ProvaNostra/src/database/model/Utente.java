@@ -1,25 +1,55 @@
 package database.model;
 
+import java.math.BigInteger;
+
 /**
  * 
  * @author anton
  */
 public class Utente {
 
+	private Long idUtente;
 	private String nickName;
 	private String email;
 	private String telefonNumber;
 	private String pathImage;
+	private boolean isAdministrator;
+	private BigInteger idSupply;
 
 	public Utente() {
 
 	}
 
-	public Utente( String email, String nickName, String telefonNumber, String pathImage) {
+	public Utente(String email, String nickName, String telefonNumber, String pathImage, boolean isAdministrator) {
 		this.email = email;
 		this.nickName = nickName;
 		this.telefonNumber = telefonNumber;
 		this.pathImage = pathImage;
+		this.isAdministrator = isAdministrator;
+	}
+
+	public Long getIdUtente() {
+		return idUtente;
+	}
+
+	public void setIdUtente(Long idUtente) {
+		this.idUtente = idUtente;
+	}
+
+	public boolean isAdministrator() {
+		return isAdministrator;
+	}
+
+	public void setAdministrator(boolean isAdministrator) {
+		this.isAdministrator = isAdministrator;
+	}
+
+	public BigInteger getIdSupply() {
+		return idSupply;
+	}
+
+	public void setIdSupply(BigInteger idSupply) {
+		this.idSupply = idSupply;
 	}
 
 	public String getNickName() {

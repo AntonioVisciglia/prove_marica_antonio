@@ -15,16 +15,16 @@ public class Main {
 		try {
 			PostgreDAOFactory postgreDAOFactory = new PostgreDAOFactory();
 			UtenteDAO utenteDAO = postgreDAOFactory.getUtenteDAO();
-			
-			utenteDAO.deleteUtente("antonio01.visciglia@tagete.net");
 
-			Utente utente = new Utente("antonio01.visciglia@tagete.net", "Antonio", "+393275407014", "resources/images/a4.jpg");
+			//utenteDAO.deleteUtente("antonio01.visciglia@tagete.net");
+
+			Utente utente = new Utente("antonio01.visciglia@gmail.com", "Antonio", "+393275407014", "resources/images/a4.jpg", true);
 			utenteDAO.registra(utente);
 
-			Utente ute = utenteDAO.findByEmail("antonio01.visciglia@tagete.net");
-
-			Image im = ImageIO.read(new File(ute.getPathImage()));
-			System.out.println(im.getWidth(null));
+//			Utente ute = utenteDAO.findByEmail("antonio01.visciglia@tagete.net");
+//
+//			Image im = ImageIO.read(new File(ute.getPathImage()));
+//			System.out.println(im.getWidth(null));
 
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
