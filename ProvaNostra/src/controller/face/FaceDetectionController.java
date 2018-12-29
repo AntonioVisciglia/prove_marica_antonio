@@ -14,6 +14,7 @@ import org.opencv.objdetect.CascadeClassifier;
 import org.opencv.objdetect.Objdetect;
 import org.opencv.videoio.VideoCapture;
 
+import face_detection.compare.ImageComparison;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -163,13 +164,21 @@ public class FaceDetectionController {
 
 			if (facesArray[i].width >= 300 && facesArray[i].height >= 300) {
 				Imgproc.rectangle(frame, facesArray[i].tl(), facesArray[i].br(), new Scalar(0, 255, 0), 3);
-				this.captureAndCrop(faces,frame,"resources/images/a6.jpg");
+				this.captureAndCrop(faces,frame,"resources/temp_image/temp.jpg");
 				this.setClosed();
+				this.compare();
 				break;
-			} else
+			} 
+//			else
 				Imgproc.rectangle(frame, facesArray[i].tl(), facesArray[i].br(), new Scalar(0, 0, 255), 3);
 		}
 
+	}
+	
+	private void compare()
+	{
+		ImageComparison image_comparison= new ImageComparison();
+		image_comparison.compare();
 	}
 
 	private void captureAndCrop(MatOfRect faces, Mat frame, String path) {

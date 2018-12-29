@@ -4,6 +4,7 @@ import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 
+import face_detection.compare.ImageComparison;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +13,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+//C:\Program Files\Java\jre1.8.0_121\lib\ext\jfxrt.jar
 /**
  * The main class for a JavaFX application. It creates and handle the main
  * window with its resources (style, graphics, etc.).
@@ -47,8 +49,9 @@ public class FaceDetection extends Application
 			primaryStage.show();
 			
 			// init the controller
-			FaceDetectionController controller = loader.getController();
+			final FaceDetectionController controller = loader.getController();
 			controller.init();
+			
 			
 			// set the proper behavior on closing the application
 			primaryStage.setOnCloseRequest((new EventHandler<WindowEvent>() {
@@ -62,6 +65,7 @@ public class FaceDetection extends Application
 		{
 			e.printStackTrace();
 		}
+		
 	}
 	
 	public static void main(String[] args)

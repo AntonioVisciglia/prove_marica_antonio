@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.8.0_191"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/opencv">
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/opencv">
 		<attributes>
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="C:/Users/anton/Desktop/Mine/University/2INGSW/OPENCV/opencv/build/java/x64"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/anton/Desktop/Mine/University/2INGSW/Progetto/email/gson-2.8.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/anton/Desktop/Mine/University/2INGSW/Progetto/email/javamail-1.4.5.jar/javamail-1.4.5.jar"/>
-	<classpathentry kind="lib" path="C:/Users/anton/Desktop/Mine/University/2INGSW/Progetto/db/commons-dbcp2-2.5.0-bin/commons-dbcp2-2.5.0/commons-dbcp2-2.5.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/anton/Desktop/Mine/University/2INGSW/Progetto/db/commons-pool2-2.6.0-bin/commons-pool2-2.6.0/commons-pool2-2.6.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/anton/Desktop/Mine/University/2INGSW/Progetto/db/commons-logging-1.2-bin/commons-logging-1.2/commons-logging-1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/anton/Desktop/Mine/University/2INGSW/Progetto/db/postgresql-42.2.5.jre6.jar"/>
-	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="annotationpath" value="C:/Program Files/Java/jre1.8.0_121"/>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="C:/Program Files/Java"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry exported="true" kind="lib" path="C:/Program Files/Java/jre1.8.0_121/lib/ext/commons-logging-1.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Program Files/Java/jre1.8.0_121/lib/ext/jfxrt.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/jre1.8.0_121/lib/ext/commons-pool2-2.6.0.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/jre1.8.0_121/lib/ext/gson-2.8.2.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/jre1.8.0_121/lib/ext/javamail-1.4.5.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/jre1.8.0_121/lib/ext/postgresql-42.2.5.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/jre1.8.0_121/lib/ext/commons-dbcp2-2.5.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

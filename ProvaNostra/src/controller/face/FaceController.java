@@ -20,11 +20,6 @@ import org.opencv.objdetect.CascadeClassifier;
  */
 public class FaceController {
 
-	/**
-	 * 
-	 */
-	public FaceController() {
-	}
 
 	public void crop(MatOfRect faces, Mat image, String cropImagePath) {
 		int x = 0, y = 0, height = 0, width = 0;

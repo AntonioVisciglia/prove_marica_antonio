@@ -3,36 +3,96 @@ package face_detection.compare;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
-
-import com.sun.mail.handlers.image_gif;
-
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.HashMap;
 
 /**
  * Inferiore al 10% va bene... fin'ora. Stesso posto. stessa luce, stessa telecamera. Stesso tutto
  * 
- * 
+ * Il main da lanciare è quello della classe 'FaceDetection' del package 'controller.face'
  * 
  * @author anton
  *
  */
 
 public class ImageComparison {
+	
+	//Key: UserEmail; Value:path of UserFaceImage
+	private HashMap<String, File> users_faces_files;
+	//Key: UserEmail; Value: user image 
+	private HashMap<String, Image> users_faces_images;
+	private int cont;
+	
+	public ImageComparison() {
+		// TODO Auto-generated constructor stub
+		this.users_faces_files = new HashMap<String, File>();
+		this.users_faces_images = new HashMap<String, Image>();
+		this.cont = 7; //ora è 7(per prova), poi sarà 1
+		this.soloPERORA();
+	}
+	
+	/**
+	 * Questa funzione servirà fino a quando non avremo completato il login.
+	 * Viene richiamata solo nel costruttore e prende tutte le immagini della cartella 'images' e le 
+	 * salva nelle rispettive 2 hashmap. 
+	 */
+	private void soloPERORA()
+	{
+		try {
+		File folder = new File("resources/images");
+		File[] listOfFiles = folder.listFiles();
+		String cont = "1";
 
-	public void compare(Image imgA, Image imgB) {
+		for (File file : listOfFiles) {
+		    if (file.isFile()) {
+		        this.users_faces_files.put(cont, file);
+				this.users_faces_images.put(cont, ImageIO.read(file));
+				}
+		        cont+=1;
+		    }
+		}catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();} 
+	}
+	
+	/**
+	 * Compare l'immagine appena catturata con tutte le immagini degli utentei già registrati.
+	 * Ritorna true se l'immagine non è già presente; false, altrimenti.
+	 * @param imageToCompare
+	 * @return
+	 */
+	private boolean isAnewUser(Image imageToCompare)
+	{
+		for(Image user_image: this.users_faces_images.values())
+		{
+			//se le due immagini sono le stesse, ritorno false, perché significa che non è un nuovo utente
+			if(this.compareTwoImages(user_image, imageToCompare))
+				return false;
+		}
+		return true;
+	}
+	
+
+	/**
+	 * Ritorna true se le immagini sono le stesse; false, altrimenti.
+	 * @param imgA
+	 * @param imgB
+	 * @return
+	 */
+	private boolean compareTwoImages(Image imgA, Image imgB) {
 
 			/**
 			 * TODO SCALE of image
 			 */
 			int width1 = imgA.getWidth(null);
-			int width2 = imgB.getWidth(null);
+//			int width2 = imgB.getWidth(null);
 			int height1 = imgA.getHeight(null);
-			int height2 = imgB.getHeight(null);
+//			int height2 = imgB.getHeight(null);
 
-			if ((width1 != width2) || (height1 != height2))
-				System.out.println("Error: Images dimensions" + " mismatch");
-			else {
+				
 				long difference = 0;
 				for (int y = 0; y < height1; y++) {
 					for (int x = 0; x < width1; x++) {
@@ -63,33 +123,128 @@ public class ImageComparison {
 
 				// There are 255 values of pixels in total
 				double percentage = (avg_different_pixels / 255) * 100;
-
-				if( percentage < 6.1 )
+                System.out.println("Difference Percentage-->" + percentage);
+				
+                if( percentage < 6.1 )
+				{
 					System.out.println("I due volti SONO gli stessi.");
-				else 
+					return true;
+				}
+			
 					System.err.println("I due volti NON SONO gli stessi.");
-				System.out.println("Difference Percentage-->" + percentage);
-			}
+					return false;
+				
 	}
 	
-	public static void main(String[] args) {
-		try {
-			
-			ImageComparison imageComparision = new ImageComparison();
-			
-			String base = "C:\\Users\\anton\\Desktop\\";
-			File fileA = new File(base+"a2.jpg");
-			File fileB = new File(base +"a3.jpg");
-			
-			Image im = ImageIO.read(fileA);
-			Image im1 = ImageIO.read(fileB);
-			
-			imageComparision.compare(im, im1);
+	
+	/**
+	 * Cancella un file da una cartella
+	 * @param folder_path -> path della cartella
+	 * @param image_path -> path del file da eliminare
+	 */
+	private void deleteAnElementInAfolder(String folder_path, String image_path)
+	{
+		File file_to_delete = new File(folder_path+"/"+image_path);
+		
+		if(file_to_delete.exists())
+		  file_to_delete.delete();
+	}
+	
+	/**
+	 * Questa funzione fa la resize logica di un'immagine.
+	 * @param im -> l'immagine a cui viene applicata la resize.
+	 * @return
+	 */
+	private void resizeImage(Image im)
+	{
+		int width = im.getWidth(null);
+		int height = im.getHeight(null);
 
-		}catch (Exception e) {
-			// TODO: handle exception
-			System.out.println(e.getMessage());
+		if ((width != 300) || (height != 300))
+		{
+			//QUI VA FATTA LA RESIZE DELLE IMMAGINI
+			System.out.println("In 'Compare'. Error: Images dimensions" + " mismatch");
+			System.out.println("PRIMA: width: "+width+" height: "+height);
+			BufferedImage imgB2 = ((BufferedImage)im);
+		    BufferedImage new_image = new BufferedImage(300, 300, imgB2.getType());
+			im = new_image;
+			System.out.println("PRIMA: width: "+im.getWidth(null)+" height: "+im.getHeight(null));
+		}
+		
+	}
+	
+	/**
+	 * Contiene tutto l'algoritmo della compare tra l'immagine appena fatta dalla detection e
+	 *  tutte le immagini degli utenti già registrati: se l'immagine è già registrata, l'utente può accedere, altrimenti no.
+	 */
+	public void compare()
+	{
+		try {
+		String base = "resources/temp_image/";
+		File fileA = new File(base+"temp.jpg");
+		
+		Image im = ImageIO.read(fileA);
+		
+		//controllo se va fatta la resize o meno dell'immagine
+		this.resizeImage(im);
+		
+		if(!this.isAnewUser(im))
+			System.out.println("ACCESSO PERMESSO");
+		else
+			System.out.println("ACCESSO NEGATO");
+		
+        //ELIMINO IL FILE DALLA CARTELLA
+		this.deleteAnElementInAfolder("resources/temp_image", "temp.jpg");
+		
+	}catch (Exception e) {
+		// TODO: handle exception
+		System.out.println(e.getMessage());
+	}
+}
+	/////////////////////////NON USATE//////////////////////////////////////////////////////////////
+	/**
+	 * E' una funzione che viene richiamata ogni qual volta un utente vuole accedere alla casa.
+	 * @param user_email
+	 * @param file_user_image_path
+	 */
+	private void addUserImage(String user_email, String file_user_image_path)
+	{
+		try {
+			String base = "resources/images/";
+		    File file = new File(base +file_user_image_path);
+			Image user_image = ImageIO.read(file);
+			this.users_faces_files.put(user_email, file);
+			this.users_faces_images.put(user_email, user_image);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Sposta il file dalla cartella 'tmep_image' alla 'images'
+	 * @param file
+	 */
+	private void moveNewUserToImageFolder(File file)
+	{
+		//aggiungo il file nella cartella 'images'
+		
+		try {
+			Files.move ( Paths.get("resources/temp_image/a6.jpg"),  Paths.get("resources/images/a"+this.cont+".jpg"));
+			this.cont++;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 		
+	}
+
+	
+	
+//	public static void main(String[] args) {
+//			
+//			ImageComparison imageComparision = new ImageComparison();
+//		    imageComparision.compare();	
+//			
+//	}
 
 }
