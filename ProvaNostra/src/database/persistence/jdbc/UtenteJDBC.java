@@ -77,19 +77,19 @@ public class UtenteJDBC implements UtenteDAO {
 			connection = basicDataSource.getConnection();
 
 			Configuration config = (Configuration) Utils.getJsonFile(Configuration.class, Utils.DB_PATH_QUERY);
-
 			statement = connection.prepareStatement(config.findByEmail);
+
 			statement.setString(1, email);
 			resultSet = statement.executeQuery();
 
 			Utente user = null;
 
-			while (resultSet.next()) {
+			if (resultSet.next()) {
 
 				if (user == null) {
 					user = new Utente();
 				}
-				
+
 				user.setEmail(resultSet.getString("email"));
 				user.setNickName(resultSet.getString("nick_name"));
 				user.setPathImage(resultSet.getString("image_path"));

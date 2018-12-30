@@ -3,7 +3,8 @@ package database.model;
 import java.math.BigInteger;
 
 /**
- * 
+ * Classe Bean della tabella users.
+ * La password la salviamo solo su db.
  * @author anton
  */
 public class Utente {
