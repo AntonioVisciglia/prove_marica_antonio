@@ -205,6 +205,7 @@ public class ImageComparison {
 			{
 				System.out.println("REGISTRAZIONE AVVENUTA CON SUCCESSO!");
 				this.moveNewUserToImageFolder(base,base_image,"resources/images","a"+this.cont+".jpg");
+				this.deleteAnElementInAfolder("resources/images", "a"+this.cont+".jpg");
 				this.cont++;
 			}
 			else
